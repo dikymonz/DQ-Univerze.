@@ -47,7 +47,7 @@ export default function Navbar({ user, onLogout }) {
             </div>
             <div className="flex flex-col">
               <span className="text-sm md:text-base font-black tracking-wider text-white font-mono group-hover:text-[#ECB469] transition">
-                DQ<span className="text-[#ECB469]"> Univers.</span>
+                DQ<span className="text-[#ECB469]"> Universe.</span>
               </span>
               <span className="text-[9px] font-mono tracking-widest text-slate-400 uppercase -mt-0.5">
                 Official Website Server.
