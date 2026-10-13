@@ -84,7 +84,7 @@ export default function TopDonators() {
 
         <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-slate-900/80 px-4 py-2 rounded-xl border border-white/5">
           <HeartHandshake className="w-4 h-4 text-purple-400" />
-          <span>Support Gaming Corner Community</span>
+          <span>Support DQ Universe.</span>
         </div>
       </div>
 
