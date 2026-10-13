@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <!-- Favicon disesuaikan menggunakan LogoNew.png -->
+    <link rel="icon" type="image/png" href="/src/assets/LogoNew.png" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gaming Corner - Esports & Community Portal</title>
+
+    <!-- Script Suppress Log Violation iframe TikTok/YouTube -->
+    <script>
+      (function() {
+        const suppressViolation = (orig) => function(...args) {
+          if (typeof args[0] === 'string' && (
+            args[0].includes('Permissions policy violation') || 
+            args[0].includes('unload is not allowed')
+          )) {
+            return;
+          }
+          return orig.apply(this, args);
+        };
+
+        console.error = suppressViolation(console.error);
+        console.warn = suppressViolation(console.warn);
+        console.log = suppressViolation(console.log);
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

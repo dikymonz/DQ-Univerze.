@@ -1,0 +1,117 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800;900&display=swap');
+
+/* Configuration Theme Extensions for Tailwind v4 */
+@theme {
+  --color-discord: #5865f2;
+  --color-discord-dark: #404fee;
+  --color-dark-bg: #07090e;
+  --color-card-bg: #0f131c;
+  --color-neon-cyan: #00f0ff;
+  --color-neon-green: #00ff87;
+  --color-neon-purple: #9d4edf;
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Base Body Styling */
+body {
+  background-color: #07090e;
+  color: #f1f5f9;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Heading Typography Override */
+h1, h2, h3, h4, .font-display {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Custom Scrollbar Gaming Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #07090e;
+}
+::-webkit-scrollbar-thumb {
+  background: #5865f2;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff;
+}
+
+/* Background Cyber Grid Pattern */
+.bg-cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Background Radial Vignette Overlay */
+.bg-vignette {
+  background: radial-gradient(circle at center, transparent 0%, #07090e 90%);
+}
+
+/* Glassmorphism Classes */
+.glass-nav {
+  background: rgba(15, 19, 28, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(15, 19, 28, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Hover Glow Utilities */
+.glow-purple-hover:hover {
+  box-shadow: 0 0 25px rgba(88, 101, 242, 0.35);
+  border-color: rgba(88, 101, 242, 0.6);
+}
+
+.glow-cyan-hover:hover {
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+  border-color: rgba(0, 240, 255, 0.6);
+}
+
+/* Pulsing Ambient Light Glow Animations */
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.1);
+    opacity: 0.4;
+  }
+}
+
+.animate-glow-slow {
+  animation: floatGlow 8s ease-in-out infinite;
+}
+
+.animate-glow-delayed {
+  animation: floatGlow 10s ease-in-out infinite 3s;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
