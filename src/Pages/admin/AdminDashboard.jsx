@@ -20,21 +20,36 @@ export default function AdminDashboard({ user, onLogout }) {
 
   const fetchStats = async () => {
     try {
-      const [shopRes, tourneyRes, journeyRes, donatorRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/shop').catch(() => ({ data: [] })),
-        axios.get('http://localhost:5000/api/tournaments').catch(() => ({ data: [] })),
-        axios.get('http://localhost:5000/api/journeys').catch(() => ({ data: [] })),
-        axios.get('http://localhost:5000/api/donators').catch(() => ({ data: { data: [] } })),
+      const token = localStorage.getItem('token');
+      const headers = { Authorization: `Bearer ${token}` };
+
+      // Menggunakan Promise.allSettled agar jika satu endpoint gagal, yang lain tetap terbaca
+      const [shopRes, tourneyRes, journeyRes, donatorRes] = await Promise.allSettled([
+        axios.get('https://dq-universe-api.vercel.app/api/shop', { headers }),
+        axios.get('https://dq-universe-api.vercel.app/api/tournaments', { headers }),
+        axios.get('https://dq-universe-api.vercel.app/api/journeys', { headers }),
+        axios.get('https://dq-universe-api.vercel.app/api/donators', { headers }),
       ]);
 
+      const getVal = (res) => {
+        if (res.status !== 'fulfilled') return [];
+        const data = res.value.data;
+        return Array.isArray(data) ? data : (data?.data || []);
+      };
+
+      const shops = getVal(shopRes);
+      const tourneys = getVal(tourneyRes);
+      const journeys = getVal(journeyRes);
+      const donators = getVal(donatorRes);
+
       setStats({
-        shopCount: shopRes.data?.data?.length || shopRes.data?.length || 0,
-        tourneyCount: tourneyRes.data?.data?.length || tourneyRes.data?.length || 0,
-        journeyCount: journeyRes.data?.data?.length || journeyRes.data?.length || 0,
-        donatorCount: donatorRes.data?.data?.length || 0,
+        shopCount: shops.length,
+        tourneyCount: tourneys.length,
+        journeyCount: journeys.length,
+        donatorCount: donators.length,
       });
     } catch (err) {
-      console.error('Error fetching admin stats:', err);
+      console.error('Error fetching admin stats:', err.message);
     }
   };
 
@@ -44,7 +59,7 @@ export default function AdminDashboard({ user, onLogout }) {
 
     setCleaningDisk(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/admin/clean-disk');
+      const res = await axios.post('https://dq-universe-api.vercel.app/api/admin/clean-disk');
       alert(res.data.message || 'Pembersihan file selesai!');
     } catch (err) {
       console.error('Error clean disk:', err);

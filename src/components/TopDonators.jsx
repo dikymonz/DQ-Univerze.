@@ -14,7 +14,8 @@ export default function TopDonators() {
 
   const fetchDonators = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/donators');
+      // Gunakan URL Domain Utama Production Vercel Anda
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/donators');
       if (res.data?.success) {
         setDonators(res.data.data);
       }
@@ -170,7 +171,7 @@ export default function TopDonators() {
 
       {/* FOOTER NOTE */}
       <div className="text-center pt-2 font-mono text-[11px] text-slate-500">
-        Terima kasih kepada seluruh member yang telah mendukung keberlangsungan server Gaming Corner!
+        Thank you for being part of DQ Universe. and helping our community grow. ✦
       </div>
     </div>
   );

@@ -25,7 +25,8 @@ export default function AdminJourney() {
   const fetchJourneys = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/journeys');
+      // Perbaikan: Menggunakan URL backend Vercel produksi
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/journeys');
       if (res.data.success) setJourneys(res.data.data);
     } catch {
       setError('Gagal memuat data journey.');
@@ -53,7 +54,8 @@ export default function AdminJourney() {
       }
 
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/journeys', formData, {
+      // Perbaikan: Menggunakan URL backend Vercel produksi
+      const res = await axios.post('https://dq-universe-api.vercel.app/api/journeys', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
@@ -80,7 +82,8 @@ export default function AdminJourney() {
     if (!window.confirm('Yakin ingin menghapus journey ini?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/journeys/${id}`, {
+      // Perbaikan: Menggunakan URL backend Vercel produksi
+      await axios.delete(`https://dq-universe-api.vercel.app/api/journeys/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchJourneys();

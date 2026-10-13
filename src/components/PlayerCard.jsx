@@ -90,7 +90,7 @@ export default function PlayerCard({ user, showDownload = true }) {
             <div className="flex items-center gap-1.5">
               <Gamepad2 className="w-5 h-5 text-amber-400" />
               <span className="font-mono font-black text-white text-[11px] tracking-widest uppercase">
-                GAMING <span className="text-amber-400">CORNER</span>
+                DQ <span className="text-amber-400">Universe.</span>
               </span>
             </div>
             <span className="px-2 py-0.5 rounded-full text-[8px] font-mono font-bold bg-amber-500/10 border border-amber-500/30 text-amber-400 uppercase flex items-center gap-1">

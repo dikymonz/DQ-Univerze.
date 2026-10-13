@@ -41,7 +41,8 @@ export default function AdminTournaments() {
   const fetchTournaments = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/tournaments');
+      // Perbaikan: Menggunakan URL backend Vercel produksi
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/tournaments');
       const dataList = Array.isArray(res.data) ? res.data : (res.data?.data || []);
       setTournaments(dataList);
     } catch (err) {
@@ -176,9 +177,11 @@ export default function AdminTournaments() {
       };
 
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/tournaments/${editingId}`, formData, config);
+        // Perbaikan: Menggunakan URL backend Vercel produksi
+        await axios.put(`https://dq-universe-api.vercel.app/api/tournaments/${editingId}`, formData, config);
       } else {
-        await axios.post('http://localhost:5000/api/tournaments', formData, config);
+        // Perbaikan: Menggunakan URL backend Vercel produksi
+        await axios.post('https://dq-universe-api.vercel.app/api/tournaments', formData, config);
       }
 
       setIsModalOpen(false);
@@ -195,7 +198,8 @@ export default function AdminTournaments() {
     if (!window.confirm('Yakin ingin menghapus turnamen ini?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/tournaments/${id}`, {
+      // Perbaikan: Menggunakan URL backend Vercel produksi
+      await axios.delete(`https://dq-universe-api.vercel.app/api/tournaments/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchTournaments();
@@ -262,8 +266,9 @@ export default function AdminTournaments() {
           <div className="grid md:grid-cols-2 gap-4">
             {paginatedTournaments.map((item) => {
               const isLocalUpload = item.video_url?.startsWith('/uploads');
+              // Perbaikan: Menggunakan URL domain Vercel untuk preview gambar lokal
               const fullMediaUrl = isLocalUpload
-                ? `http://localhost:5000${item.video_url}`
+                ? `https://dq-universe-api.vercel.app${item.video_url}`
                 : item.video_url;
 
               const embedUrl = item.video_url ? getEmbedUrl(fullMediaUrl) : null;

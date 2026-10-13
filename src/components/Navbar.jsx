@@ -38,16 +38,16 @@ export default function Navbar({ user, onLogout }) {
           
           {/* Brand Logo */}
           <Link to="/" className="flex items-center gap-3 no-underline group">
-            <div className="relative flex items-center justify-center p-1.5 rounded-xl bg-white/5 border border-white/10 group-hover:border-cyan-500/50 transition duration-300">
+            <div className="relative flex items-center justify-center p-1.5 rounded-xl group-hover:border-cyan-500/50 transition duration-300">
               <img 
                 src={LogoGC} 
-                alt="Gaming Corner Logo" 
+                alt="DQUnivers Logo" 
                 className="w-7 h-7 md:w-8 md:h-8 object-contain group-hover:scale-105 transition duration-300"
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm md:text-base font-black tracking-wider text-white font-mono group-hover:text-cyan-400 transition">
-                GAMING<span className="text-cyan-400">CORNER</span>
+              <span className="text-sm md:text-base font-black tracking-wider text-white font-mono group-hover:text-[#ECB469] transition">
+                DQ<span className="text-[#ECB469]"> Univers.</span>
               </span>
               <span className="text-[9px] font-mono tracking-widest text-slate-400 uppercase -mt-0.5">
                 Official Website Server.
@@ -144,7 +144,8 @@ export default function Navbar({ user, onLogout }) {
                 )}
               </div>
             ) : (
-              <a href="http://localhost:5000/api/auth/discord" className="no-underline">
+              // Diubah ke URL backend Vercel agar login Discord berfungsi secara online
+              <a href="https://dq-universe-api-git-main-dikymonzs-projects.vercel.app/api/auth/discord" className="no-underline">
                 <button className="flex items-center gap-2 px-4 py-2 text-xs font-mono font-semibold tracking-wide text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-xl shadow-md transition cursor-pointer">
                   <LogIn className="w-4 h-4" /> <span>Login Discord</span>
                 </button>

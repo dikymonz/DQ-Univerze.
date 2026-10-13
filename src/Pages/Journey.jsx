@@ -11,8 +11,8 @@ export default function Journey() {
 
   const fetchJourneys = useCallback(async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/journeys').catch(() => 
-        axios.get('http://localhost:5000/api/journey')
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/journeys').catch(() => 
+        axios.get('https://dq-universe-api.vercel.app/api/journey')
       );
 
       const dataList = Array.isArray(res.data) ? res.data : (res.data?.data || []);
@@ -59,7 +59,7 @@ export default function Journey() {
           OUR <span className="text-amber-400">JOURNEY</span> TIMELINE
         </h1>
         <p className="text-xs md:text-sm text-slate-400 font-mono max-w-xl mx-auto leading-relaxed">
-          Rekam jejak perjalanan, event esports, serta momen bersejarah yang membentuk komunitas Gaming Corner.
+          A journey through our history, gaming events, and unforgettable milestones that have shaped and strengthened the DQ Universe community.
         </p>
       </div>
 
@@ -91,7 +91,7 @@ export default function Journey() {
               const isEven = index % 2 === 0;
               const isLocalUpload = item.media_url?.startsWith('/uploads');
               const fullMediaUrl = isLocalUpload
-                ? `http://localhost:5000${item.media_url}`
+                ? `https://dq-universe-api.vercel.app${item.media_url}`
                 : item.media_url;
 
               const embedUrl = item.media_url ? getEmbedUrl(fullMediaUrl) : null;

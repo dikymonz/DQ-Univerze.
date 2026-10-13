@@ -26,7 +26,8 @@ export default function AdminShop() {
   const fetchItems = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/shop');
+      // Perbaikan: Menggunakan domain backend Vercel produksi
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/shop');
       setItems(res.data);
     } catch (err) {
       console.error('Error fetching shop items:', err);
@@ -46,8 +47,8 @@ export default function AdminShop() {
         item_url: item.item_url || '',
         image: null
       });
-      // Menampilkan preview gambar yang sudah ada di database dengan URL lengkap backend
-      setImagePreview(item.image_url ? `http://localhost:5000${item.image_url}` : null);
+      // Perbaikan: Menampilkan preview gambar dengan URL lengkap backend Vercel
+      setImagePreview(item.image_url ? `https://dq-universe-api.vercel.app${item.image_url}` : null);
     } else {
       setEditId(null);
       setForm({
@@ -88,14 +89,14 @@ export default function AdminShop() {
     formData.append('category', form.category);
     formData.append('item_url', form.item_url);
     
-    // Pastikan key file adalah 'image' agar terbaca oleh middleware multer di backend
     if (form.image) {
       formData.append('image', form.image);
     }
 
     try {
       if (editId) {
-        await axios.put(`http://localhost:5000/api/admin/shop/${editId}`, formData, {
+        // Perbaikan: Menggunakan domain backend Vercel produksi
+        await axios.put(`https://dq-universe-api.vercel.app/api/admin/shop/${editId}`, formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -103,7 +104,8 @@ export default function AdminShop() {
         });
         alert('Produk berhasil diperbarui!');
       } else {
-        await axios.post('http://localhost:5000/api/admin/shop', formData, {
+        // Perbaikan: Menggunakan domain backend Vercel produksi
+        await axios.post('https://dq-universe-api.vercel.app/api/admin/shop', formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
@@ -123,7 +125,8 @@ export default function AdminShop() {
     if (!confirm('Yakin ingin menghapus produk ini?')) return;
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/api/admin/shop/${id}`, {
+      // Perbaikan: Menggunakan domain backend Vercel produksi
+      await axios.delete(`https://dq-universe-api.vercel.app/api/admin/shop/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchItems();
@@ -167,9 +170,9 @@ export default function AdminShop() {
             {items.map((item) => (
               <div key={item.id} className="p-4 rounded-2xl bg-black/40 border border-white/5 space-y-3 flex flex-col justify-between">
                 <div className="flex items-start gap-3">
-                  {/* Menampilkan Gambar dengan URL server backend */}
+                  {/* Perbaikan: Menampilkan gambar dengan domain server Vercel */}
                   <img 
-                    src={item.image_url ? `http://localhost:5000${item.image_url}` : 'https://via.placeholder.com/60'} 
+                    src={item.image_url ? `https://dq-universe-api.vercel.app${item.image_url}` : 'https://via.placeholder.com/60'} 
                     alt={item.name} 
                     className="w-16 h-16 rounded-xl object-cover border border-white/10 shrink-0 bg-slate-800" 
                     onError={(e) => { e.target.src = 'https://via.placeholder.com/60'; }}

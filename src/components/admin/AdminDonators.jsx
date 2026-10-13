@@ -17,7 +17,11 @@ export default function AdminDonators() {
   const fetchDonators = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/donators');
+      const token = localStorage.getItem('token');
+      // Perbaikan: Memperbaiki URL endpoint yang sebelumnya dobel (/api/api/donators)
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/donators', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       if (res.data?.success) {
         setDonators(res.data.data);
       }
@@ -32,13 +36,16 @@ export default function AdminDonators() {
     e.preventDefault();
     if (!formData.discord_id || !formData.amount) return alert('Semua kolom wajib diisi!');
 
+    const token = localStorage.getItem('token');
+    const headers = { Authorization: `Bearer ${token}` };
+
     setSubmitting(true);
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/donators/${formData.id}`, formData);
+        await axios.put(`https://dq-universe-api.vercel.app/api/donators/${formData.id}`, formData, { headers });
         alert('Data donatur berhasil diperbarui!');
       } else {
-        await axios.post('http://localhost:5000/api/donators', formData);
+        await axios.post('https://dq-universe-api.vercel.app/api/donators', formData, { headers });
         alert('Donatur baru berhasil ditambahkan!');
       }
 
@@ -65,7 +72,10 @@ export default function AdminDonators() {
     if (!window.confirm('Yakin ingin menghapus donatur ini?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/donators/${id}`);
+      const token = localStorage.getItem('token');
+      await axios.delete(`https://dq-universe-api.vercel.app/api/donators/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       fetchDonators();
     } catch (err) {
       console.error('Gagal menghapus:', err);

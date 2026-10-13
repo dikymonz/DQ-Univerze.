@@ -65,7 +65,8 @@ function AppContent({ user, handleLogout, setUser, showSplash }) {
             path="/admin" 
             element={
               !user ? (
-                <AdminLogin onLoginDiscord={() => window.location.href = 'http://localhost:5000/api/auth/discord'} />
+                // Diubah ke URL backend Vercel agar login admin berfungsi secara online
+                <AdminLogin onLoginDiscord={() => window.location.href = 'https://dq-universe-api-git-main-dikymonzs-projects.vercel.app/api/auth/discord'} />
               ) : user.isAdmin === true ? (
                 <AdminDashboard user={user} onLogout={handleLogout} />
               ) : (

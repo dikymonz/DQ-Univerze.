@@ -22,20 +22,20 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <h2 className="m-0 text-lg font-black tracking-widest text-white group-hover:text-cyan-400 transition">
-                  GAMING<span className="text-cyan-400">CORNER</span>
+                <h2 className="m-0 text-lg font-black tracking-widest text-white group-hover:text-[#ECB469] transition">
+                  DQ<span className="text-[#ECB469]">Universe.</span>
                 </h2>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                   <span className="text-[10px] font-mono font-bold tracking-widest text-slate-400 uppercase">
-                    COMMUNITY PORTAL
+                    COMMUNITY WEBSITE
                   </span>
                 </div>
               </div>
             </Link>
 
             <p className="text-xs text-slate-400 font-mono leading-relaxed max-w-sm">
-              Wadah resmi komunitas gaming terintegrasi. Jelajahi turnamen esports, item shop, serta rekam jejak perjalanan komunitas kami dalam satu portal.
+              More than a game, it's a universe of connections.
             </p>
 
             <div className="flex items-center gap-2 pt-1 text-xs font-mono text-emerald-400">
@@ -84,7 +84,7 @@ export default function Footer() {
 
             <div className="pt-2">
               <a
-                href="http://localhost:5000/api/auth/discord"
+                href="https://dq-universe-api-git-main-dikymonzs-projects.vercel.app/api/auth/discord"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-300 text-xs font-bold uppercase tracking-wider hover:bg-indigo-600 hover:text-white transition shadow-lg shadow-indigo-600/20 no-underline"
@@ -99,7 +99,7 @@ export default function Footer() {
         {/* Bottom Section: Copyright & Credit */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-slate-500">
           <div>
-            © {new Date().getFullYear()} <span className="text-slate-300 font-bold">GAMING CORNER</span>. All rights reserved.
+            © {new Date().getFullYear()} <span className="text-slate-300 font-bold">© 2026 DQ Universe.</span>. All rights reserved.
           </div>
 
           <div className="flex items-center gap-1">

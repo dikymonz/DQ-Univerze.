@@ -54,7 +54,7 @@ export default function SplashScreen({ onFinish }) {
         {/* Title */}
         <div className="space-y-1">
           <h1 className="text-xl font-black text-white tracking-widest uppercase font-mono">
-            GAMING <span className="text-amber-400">CORNER</span>
+            DQ <span className="text-amber-400">Universe.</span>
           </h1>
           <p className="text-[10px] text-slate-500 font-mono tracking-wider uppercase">
             Initializing System Portal...

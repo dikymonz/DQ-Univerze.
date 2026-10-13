@@ -12,7 +12,7 @@ import { getEmbedUrl } from '../utils/embed';
 function ImageCarousel({ images, title, fullMediaUrl, isCompleted, embedUrl, onOpenDetail }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Parsing array images dari JSON MySQL jika ada
+  // Parsing array images dari JSON database jika ada
   const imageList = useMemo(() => {
     if (!images) return [];
     if (Array.isArray(images)) return images;
@@ -26,7 +26,7 @@ function ImageCarousel({ images, title, fullMediaUrl, isCompleted, embedUrl, onO
   // Susun daftar media (Prioritaskan list images, lalu fallback ke fullMediaUrl / embedUrl)
   const displayImages = useMemo(() => {
     if (imageList.length > 0) {
-      return imageList.map(img => img.startsWith('/uploads') ? `http://localhost:5000${img}` : img);
+      return imageList.map(img => img.startsWith('/uploads') ? `https://dq-universe-api.vercel.app${img}` : img);
     }
     if (fullMediaUrl) return [fullMediaUrl];
     if (embedUrl) return [embedUrl];
@@ -85,7 +85,7 @@ function ImageCarousel({ images, title, fullMediaUrl, isCompleted, embedUrl, onO
         <>
           <img
             src={currentMedia}
-            alt={`${title} - slide ${currentIndex + 1}`}
+            alt={`${title} slide ${currentIndex + 1}`}
             className={`w-full h-full object-contain transition-all duration-300 ${
               isCompleted ? 'grayscale-30' : ''
             }`}
@@ -185,7 +185,8 @@ export default function Tournament() {
   const fetchTournaments = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/tournaments');
+      // Perbaikan: Menggunakan URL backend Vercel produksi
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/tournaments');
       const dataList = Array.isArray(res.data) 
         ? res.data 
         : (res.data?.data || []);
@@ -237,7 +238,7 @@ export default function Tournament() {
       {/* HEADER SECTION */}
       <div className="text-center space-y-1.5 relative">
         <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-semibold uppercase tracking-widest">
-          <Sparkles className="w-3 h-3" /> GAMING CORNER ESPORTS
+          <Sparkles className="w-3 h-3" /> DQ Universe. ESPORTS
         </div>
         <h1 className="text-xl md:text-3xl font-black text-white uppercase tracking-widest">
           TOURNAMENT <span className="text-cyan-400">ARENA</span>
@@ -328,7 +329,7 @@ export default function Tournament() {
           {paginatedTournaments.map((item) => {
             const isLocalUpload = item.video_url?.startsWith('/uploads');
             const fullMediaUrl = isLocalUpload
-              ? `http://localhost:5000${item.video_url}`
+              ? `https://dq-universe-api.vercel.app${item.video_url}`
               : item.video_url;
 
             const embedUrl = item.video_url ? getEmbedUrl(fullMediaUrl) : null;
@@ -406,6 +407,7 @@ export default function Tournament() {
                 {/* CARD FOOTER */}
                 <div className="p-2 px-3.5 bg-slate-900/40 border-t border-white/5 flex items-center justify-between text-[9px] text-slate-500">
                   <button 
+                    type="button"
                     onClick={() => {
                       let imgs = [];
                       if (item.images) {
@@ -413,7 +415,7 @@ export default function Tournament() {
                       } else if (fullMediaUrl) {
                         imgs = [fullMediaUrl];
                       }
-                      const formattedImgs = imgs.map(img => img.startsWith('/uploads') ? `http://localhost:5000${img}` : img);
+                      const formattedImgs = imgs.map(img => img.startsWith('/uploads') ? `https://dq-universe-api.vercel.app${img}` : img);
                       openLightbox(item, formattedImgs, 0);
                     }}
                     className="text-cyan-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
@@ -438,6 +440,7 @@ export default function Tournament() {
 
           <div className="flex items-center gap-1">
             <button
+              type="button"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               className="p-1.5 rounded-lg bg-slate-900 border border-white/10 text-slate-300 hover:border-cyan-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"
@@ -448,6 +451,7 @@ export default function Tournament() {
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
               <button
                 key={pageNum}
+                type="button"
                 onClick={() => setCurrentPage(pageNum)}
                 className={`w-7 h-7 rounded-lg font-bold transition cursor-pointer text-[11px] ${
                   currentPage === pageNum
@@ -460,6 +464,7 @@ export default function Tournament() {
             ))}
 
             <button
+              type="button"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
               className="p-1.5 rounded-lg bg-slate-900 border border-white/10 text-slate-300 hover:border-cyan-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition cursor-pointer"

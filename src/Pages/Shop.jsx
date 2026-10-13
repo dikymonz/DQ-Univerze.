@@ -20,7 +20,8 @@ export default function Shop() {
   const fetchShopItems = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/shop');
+      // Perbaikan: Menggunakan URL backend Vercel produksi
+      const res = await axios.get('https://dq-universe-api.vercel.app/api/shop');
       setItems(res.data);
     } catch (err) {
       console.error('Gagal memuat data shop:', err);
@@ -129,11 +130,12 @@ export default function Shop() {
                 className="rounded-3xl bg-slate-900/80 border border-white/10 overflow-hidden hover:border-cyan-400/40 transition-all duration-300 flex flex-col justify-between group shadow-xl hover:-translate-y-1"
               >
                 <div>
-                  {/* Container Gambar (Menggunakan object-contain dan padding agar gambar tidak terpotong) */}
+                  {/* Container Gambar */}
                   <div className="relative h-60 w-full bg-slate-950/80 overflow-hidden border-b border-white/10 flex items-center justify-center p-4">
                     {item.image_url ? (
                       <img 
-                        src={`http://localhost:5000${item.image_url}`} 
+                        // Perbaikan: Menggunakan domain backend Vercel untuk path gambar
+                        src={`https://dq-universe-api.vercel.app${item.image_url}`} 
                         alt={item.name} 
                         className="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-500 drop-shadow-md"
                       />

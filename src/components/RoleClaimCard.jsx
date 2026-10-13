@@ -6,16 +6,18 @@ export default function RoleClaimCard({ user }) {
   const [claiming, setClaiming] = useState(null);
   const [status, setStatus] = useState(null); // { type: 'success' | 'error', text: '' }
 
-  const rolesAvailable = [
-    {
-      key: 'web_member',
-      name: 'Web Portal Member',
-      desc: 'Role bukti verifikasi bahwa kamu telah terhubung di Portal Web Resmi Gaming Corner.',
-      badge: 'OFFICIAL PORTAL',
-      border: 'border-amber-500/40',
-      color: 'from-amber-500 to-amber-700'
-    }
-  ];
+
+const rolesAvailable = [
+  {
+    key: 'web_member',
+    name: 'Official Website Member Role ',
+    desc: 'Official verification role confirming that you are connected to the official DQ Universe Web Portal.',
+    badge: 'Universe Unlocked.',
+    border: 'border-[#ECB469]/40',
+    color: 'from-[#ECB469] to-[#B8863B]'
+  }
+];
+
 
   const handleClaim = async (roleKey) => {
     if (!user) {
@@ -31,8 +33,9 @@ export default function RoleClaimCard({ user }) {
 
     try {
       const token = localStorage.getItem('token');
+      // PERBAIKAN: Menggunakan URL backend Vercel produksi
       const res = await axios.post(
-        'http://localhost:5000/api/claim-role',
+        'https://dq-universe-api.vercel.app/api/claim-role',
         { roleKey },
         { headers: { Authorization: `Bearer ${token}` } }
       );
