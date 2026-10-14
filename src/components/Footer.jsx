@@ -23,7 +23,7 @@ export default function Footer() {
               </div>
               <div>
                 <h2 className="m-0 text-lg font-black tracking-widest text-white group-hover:text-[#ECB469] transition">
-                  DQ<span className="text-[#ECB469]">Universe.</span>
+                  DQ<span className="text-[#ECB469]">Multiverse.</span>
                 </h2>
                 <div className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
