@@ -50,7 +50,7 @@ export default function Home({ user }) {
               <span className="bg-linear-to-r from-indigo-500 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
                 Dominates
               </span> <br />
-              The Universe.
+              The Multiverse.
             </h1>
             <p className="text-slate-400 text-sm md:text-base max-w-xl leading-relaxed pt-2 font-sans">
               A gaming community to play together, make new friends, and have fun. Build your squad, level up your skills, and create unforgettable gaming moments! 🚀✨
